@@ -3,17 +3,84 @@ from pypdf import PdfReader
 
 # Page Configuration
 st.set_page_config(
-    page_title="BookVerse AI - Digital Library",
+    page_title="BookVerse AI - Premium Digital Library",
     page_icon="📚",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
-# Header Section
-st.title("📚 BookVerse AI - Digital Library & Reader")
-st.caption("Explore pre-loaded books or upload your own PDF/TXT document instantly!")
-st.divider()
+# Custom Premium Dark & Neon UI Styling
+st.markdown("""
+    <style>
+    /* Global App Background */
+    .stApp {
+        background-color: #0B0F19;
+        color: #F8FAFC;
+        font-family: 'Inter', sans-serif;
+    }
 
-# Pre-loaded Online Books Database
+    /* Premium Hero Header */
+    .hero-banner {
+        background: linear-gradient(135deg, #1E1B4B 0%, #311B92 50%, #4A148C 100%);
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        border: 1px solid #7C3AED;
+        box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        margin-bottom: 25px;
+    }
+    .hero-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        background: linear-gradient(90deg, #A78BFA, #F472B6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+    }
+    .hero-tag {
+        color: #94A3B8;
+        font-size: 1.1rem;
+        margin-top: 8px;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+        background: #111827;
+        border: 1px solid #1F2937;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    /* Search Result Box */
+    .search-card {
+        background: #1E293B;
+        border-left: 4px solid #8B5CF6;
+        padding: 14px;
+        border-radius: 10px;
+        margin-top: 10px;
+        color: #E2E8F0;
+    }
+
+    /* Custom Input and Select Box Styling */
+    .stTextInput > div > div > input, .stSelectbox > div > div > div {
+        background-color: #1F2937 !important;
+        color: white !important;
+        border-radius: 10px !important;
+        border: 1px solid #4B5563 !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Top Banner Header
+st.markdown("""
+    <div class="hero-banner">
+        <h1 class="hero-title">📚 BookVerse AI</h1>
+        <div class="hero-tag">Next-Gen Digital Library, Interactive Reader & Smart Search Engine</div>
+    </div>
+""", unsafe_allow_html=True)
+
+# Pre-loaded Online Books Database with Rich Content & Covers
 PRELOADED_BOOKS = {
     "Artificial Intelligence Handbook": {
         "author": "Dr. Alex Rivera",
@@ -49,18 +116,18 @@ PRELOADED_BOOKS = {
 col_left, col_right = st.columns([1, 2], gap="large")
 
 with col_left:
-    st.subheader("📥 Upload Custom Document")
-    uploaded_file = st.file_uploader("Upload PDF or TXT file", type=["pdf", "txt"])
+    st.markdown("### 📥 Document Portal")
+    uploaded_file = st.file_uploader("Upload custom PDF or TXT file", type=["pdf", "txt"])
     st.divider()
 
-    st.subheader("📖 Featured Online Library")
+    st.markdown("### 📖 Featured Library")
     selected_book_title = st.selectbox("Choose a pre-loaded book:", list(PRELOADED_BOOKS.keys()))
     
-    # Display Cover Image and Metadata for Selected Pre-loaded Book
+    # Display Cover Image and Metadata with High Aesthetics
     book_meta = PRELOADED_BOOKS[selected_book_title]
     st.image(book_meta["cover"], caption=selected_book_title, use_column_width=True)
-    st.write(f"**Author:** {book_meta['author']}")
-    st.write(f"**Category:** {book_meta['category']}")
+    st.markdown(f"**👤 Author:** {book_meta['author']}")
+    st.markdown(f"**🏷️ Category:** {book_meta['category']}")
 
 # Determine Active Document (Uploaded File OR Preloaded Online Content)
 pages_content = []
@@ -90,16 +157,16 @@ else:
 
 # Right Column - Interactive Reader and Search Engine
 with col_right:
-    st.subheader(f"📖 Active Book: {document_name}")
+    st.markdown(f"## 📖 Active Book: `{document_name}`")
     
     tab_reader, tab_search = st.tabs(["📖 Interactive Page Reader", "🔍 Smart Search Engine"])
 
     with tab_reader:
         if pages_content:
             page_no = st.slider("Flip Pages", 1, len(pages_content), 1)
-            st.markdown(f"### Page {page_no} of {len(pages_content)}")
+            st.markdown(f"#### Page {page_no} of {len(pages_content)}")
             
-            # Display Page Content inside container
+            # Display Page Content inside container with nice styling
             st.info(pages_content[page_no - 1] if pages_content[page_no - 1].strip() else "*(Empty or Image Page)*")
 
             # Document Statistics
@@ -107,7 +174,7 @@ with col_right:
             st.caption(f"📊 Total Word Count in Document: {words_count:,}")
 
     with tab_search:
-        st.markdown("### 🔍 Search Inside Book")
+        st.markdown("### 🔍 Intelligent Content Lookup")
         search_query = st.text_input("Type key phrases, chapter names, or terms to search:")
 
         if search_query:
@@ -115,7 +182,7 @@ with col_right:
             if matches:
                 st.write(f"Found **{len(matches)}** relevant result(s):")
                 for idx, match in enumerate(matches[:8], 1):
-                    st.info(f"**Match {idx}:** {match}")
+                    st.markdown(f'<div class="search-card"><b>Match {idx}:</b> {match}</div>', unsafe_allow_html=True)
             else:
                 st.warning("No matches found for this keyword.")
         else:
