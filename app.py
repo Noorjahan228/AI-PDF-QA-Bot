@@ -8,118 +8,41 @@ st.set_page_config(
     layout="wide"
 )
 
-# Header
+# Header Section
 st.title("📚 BookVerse AI - Digital Library & Reader")
-st.caption("Explore featured books or upload your own PDF/TXT to read and search!")
+st.caption("Explore pre-loaded books or upload your own PDF/TXT document instantly!")
 st.divider()
 
-# Sample Featured Online Books Data
-FEATURED_BOOKS = {
-    "The Art of War": {
-        "author": "Sun Tzu",
-        "cover": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80",
-        "description": "An ancient Chinese military treatise dating from the Late Spring and Autumn Period.",
-        "content": """The Art of War by Sun Tzu.
-Chapter 1: Laying Plans
-Sun Tzu said: The art of war is of vital importance to the State. It is a matter of life and death, a road either to safety or to ruin. Hence it is a subject ofAapki digital library ko ek realistic **Online E-Book Store & Reader** wala feel dene ke liye, hum script mein **Pre-loaded Sample E-Books** aur unki **Cover Images** add kar dete hain. 
-
-Isse jab bhi koi aapki website open karega, use pehle se hi curated books, unke visual covers, aur reading material milenge—chahe unhone koi file upload na ki ho!
-
----
-
-### **🛠️ GitHub Par Code Update Karo:**
-
-1. **`github.com`** par apni repository open karo: **`Noorjahan228/AI-PDF-QA-Bot`**
-2. **`app.py`** par click karke Pencil (Edit ✏️) icon par click karo.
-3. Purana poora code mita kar niche wala code paste karke **Commit changes** kar do:
-
-```python
-import streamlit as st
-from pypdf import PdfReader
-
-# Page Configuration
-st.set_page_config(
-    page_title="BookVerse AI - Online Digital Library",
-    page_icon="📚",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
-
-# Custom Styling for Sleek E-Commerce & Reader Theme
-st.markdown("""
-    <style>
-    .stApp {
-        background-color: #0F172A;
-        color: #F8FAFC;
-        font-family: 'Inter', sans-serif;
-    }
-    .hero-banner {
-        background: linear-gradient(135deg, #1E1B4B 0%, #311B92 50%, #4A148C 100%);
-        padding: 25px;
-        border-radius: 16px;
-        text-align: center;
-        border: 1px solid #4C1D95;
-        margin-bottom: 25px;
-    }
-    .card-box {
-        background: #1E293B;
-        border: 1px solid #334155;
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    .search-card {
-        background: #0F172A;
-        border-left: 4px solid #A855F7;
-        padding: 12px;
-        border-radius: 8px;
-        margin-top: 8px;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# Top Banner
-st.markdown("""
-    <div class="hero-banner">
-        <h1 style="color: white; margin: 0;">📚 BookVerse AI</h1>
-        <p style="color: #C084FC; margin-top: 5px;">Explore Online Sample Books or Upload Your Own PDF</p>
-    </div>
-""", unsafe_allow_html=True)
-
-# Pre-loaded Online Books Content
+# Pre-loaded Online Books Database
 PRELOADED_BOOKS = {
     "Artificial Intelligence Handbook": {
         "author": "Dr. Alex Rivera",
-        "category": "Technology",
-        "cover": "[https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80](https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80)",
+        "category": "Technology & AI",
+        "cover": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80",
         "content": [
             "Chapter 1: Introduction to Modern AI\nArtificial Intelligence is transforming industries worldwide through machine learning models, neural networks, and automated decision engines.",
             "Chapter 2: Neural Networks & Deep Learning\nDeep neural networks simulate human brain functions to identify complex patterns within vast datasets.",
             "Chapter 3: Future Trends\nGenerative AI and automated agents represent the next milestone in global computing capabilities."
         ]
     },
-    "The Digital Mindset": "The Digital Mindset",
-    "Python Programming Essentials": "Python Programming Essentials"
-}
-
-PRELOADED_BOOKS["The Digital Mindset"] = {
-    "author": "Sarah Jenkins",
-    "category": "Business & Innovation",
-    "cover": "[https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80](https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80)",
-    "content": [
-        "Chapter 1: Embracing Digital Transformation\nSuccess in the modern era requires a fundamental shift in how teams operate, analyze data, and adapt to rapid technological shifts.",
-        "Chapter 2: Data-Driven Decisions\nOrganizations utilizing systematic data analysis outperform competitors by identifying emerging trends earlier."
-    ]
-}
-
-PRELOADED_BOOKS["Python Programming Essentials"] = {
-    "author": "Mark Techson",
-    "category": "Software Engineering",
-    "cover": "[https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80](https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80)",
-    "content": [
-        "Chapter 1: Python Basics\nPython provides clean syntax and versatile libraries for data science, web development, and automation scripts.",
-        "Chapter 2: Data Structures\nUnderstanding lists, dictionaries, tuples, and custom classes forms the foundation of scalable software design."
-    ]
+    "The Digital Mindset": {
+        "author": "Sarah Jenkins",
+        "category": "Business & Innovation",
+        "cover": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80",
+        "content": [
+            "Chapter 1: Embracing Digital Transformation\nSuccess in the modern era requires a fundamental shift in how teams operate, analyze data, and adapt to rapid technological shifts.",
+            "Chapter 2: Data-Driven Decisions\nOrganizations utilizing systematic data analysis outperform competitors by identifying emerging trends earlier."
+        ]
+    },
+    "Python Programming Essentials": {
+        "author": "Mark Techson",
+        "category": "Software Engineering",
+        "cover": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80",
+        "content": [
+            "Chapter 1: Python Basics\nPython provides clean syntax and versatile libraries for data science, web development, and automation scripts.",
+            "Chapter 2: Data Structures\nUnderstanding lists, dictionaries, tuples, and custom classes forms the foundation of scalable software design."
+        ]
+    }
 }
 
 # Main Layout Grid
@@ -192,7 +115,7 @@ with col_right:
             if matches:
                 st.write(f"Found **{len(matches)}** relevant result(s):")
                 for idx, match in enumerate(matches[:8], 1):
-                    st.markdown(f'<div class="search-card"><b>Match {idx}:</b> {match}</div>', unsafe_allow_html=True)
+                    st.info(f"**Match {idx}:** {match}")
             else:
                 st.warning("No matches found for this keyword.")
         else:
