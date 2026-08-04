@@ -26,13 +26,38 @@ st.markdown("""
     }
     .stTextInput > div > div > input {
         border-radius: 8px;
+  import streamlit as st
+from pypdf import PdfReader
+
+# Page Configuration
+st.set_page_config(
+    page_title="PDF Insight AI",
+    page_icon="⚡",
+    layout="wide"
+)
+
+# Custom CSS for Sleek UI
+st.markdown("""
+    <style>
+    .main-header {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #4F46E5;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+    .sub-header {
+        font-size: 1.1rem;
+        color: #6B7280;
+        text-align: center;
+        margin-bottom: 30px;
     }
     </style>
-""", unsafe_allow_parse_html=True)
+""", unsafe_allow_html=True)
 
 # Title Section
-st.markdown('<div class="main-header">⚡ PDF Insight AI</div>', unsafe_allow_parse_html=True)
-st.markdown('<div class="sub-header">Upload, Extract, and Search through your documents instantly</div>', unsafe_allow_parse_html=True)
+st.markdown('<div class="main-header">⚡ PDF Insight AI</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">Upload, Extract, and Search through your documents instantly</div>', unsafe_allow_html=True)
 
 # Main Container
 col1, col2 = st.columns([1, 2])
