@@ -1,4 +1,4 @@
-iimport streamlit as st
+import streamlit as st
 from pypdf import PdfReader
 
 # Page Configuration
